@@ -1,4 +1,4 @@
-package com.fayimora.smltk
+package smltk
 
 import breeze.linalg.{Tensor, DenseMatrix, DenseVector, Transpose}
 
