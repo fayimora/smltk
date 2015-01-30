@@ -13,4 +13,4 @@ libraryDependencies ++= Seq(
   // "org.scalanlp" %% "breeze-natives" % "0.11-M0"
 )
 
-initialCommands := "import com.fayimora.smltk._"
+initialCommands := "import smltk._"
