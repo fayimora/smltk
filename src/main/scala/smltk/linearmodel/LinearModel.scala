@@ -3,6 +3,11 @@ package smltk.linearmodel
 import breeze.linalg._
 
 trait LinearModel {
+
+  var weights = DenseVector[Double]()
+  var nSamples = 0
+  var nFeats = 0
+
   def fit(X: DenseMatrix[Double], y: DenseVector[Double]): DenseVector[Double]
 
   def predict(x: Transpose[DenseVector[Double]]): Double
@@ -17,7 +22,7 @@ trait LinearModel {
    * @param yTrue the true values
    * @param yPreds the predictions
    *
-   * @return the Mean Squared Error
+   * @return the Mean Squared Error \sum_i (y_i - \hat{y_i})^2
    */
   def score(X: DenseMatrix[Double], yTrue: DenseVector[Double]): Double = {
     var mse = 0.0

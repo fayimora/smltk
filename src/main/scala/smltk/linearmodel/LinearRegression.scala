@@ -5,10 +5,6 @@ import breeze.numerics._
 
 class LinearRegression extends LinearModel {
 
-  var weights = DenseVector[Double]()
-  var nSamples = 0
-  var nFeats = 0
-
   def fit(X: DenseMatrix[Double], y: DenseVector[Double]): DenseVector[Double] = {
     // Setup instnce variables
     nSamples = X.rows
