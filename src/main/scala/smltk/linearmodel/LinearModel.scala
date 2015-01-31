@@ -14,7 +14,7 @@ trait LinearModel {
   var nFeats = 0
 
   /** This function computes the weights of the model
-   * @param X the datam atrix
+   * @param X the data matrix
    * @param y the targets
    *
    * @return the computed weights. It is also stored as an instance variable
@@ -40,8 +40,8 @@ trait LinearModel {
 
   /** This function computes the Mean Squared Error for this regressor
    *
+   * @param X the test dataset
    * @param yTrue the true values
-   * @param yPreds the predictions
    *
    * @return the Mean Squared Error \sum_i (y_i - \hat{y_i})^2
    */
