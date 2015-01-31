@@ -2,7 +2,7 @@ package smltk.metrics
 
 import breeze.linalg._
 
-/* This implements several scores, losses and utility functions to measure classification
+/** This implements several scores, losses and utility functions to measure classification
  * preformance
  *
  * @author Fayimora Femi-Balogun
