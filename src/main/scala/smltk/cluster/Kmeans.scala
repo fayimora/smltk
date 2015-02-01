@@ -7,16 +7,31 @@ class Kmeans(val nClusters: Int,
   val maxIterations: Int = 300,
   val nRuns: Int = 5) {
 
+  /** The data on which we run k-means clustering */
   var X: DenseMatrix[Double] = null
+
+  /** The number of data points */
   var nSamples = 0
+
+  /** The number of features/dimensions */
   var nFeats = 0
-  var centers: DenseMatrix[Double] = null
+
+  /** The cluster centers of the clusters */
+  var centroids: DenseMatrix[Double] = null
+
   var assignments: DenseMatrix[Double] = null
+
+  /** The corespondint cluster number of each datapoint*/
   var labels: DenseVector[Int] = null
+
+  /** The value of the objective function Minimising this number is the aim of k-means */
   var objective = 0.0
 
-  type RunResult = (Double, DenseMatrix[Double], DenseMatrix[Double], DenseVector[Int])
+  private[this] type RunResult = (Double, DenseMatrix[Double], DenseMatrix[Double], DenseVector[Int])
 
+  /** This function computes k-mens clustering.
+   * @param X the data points to be clustered
+   */
   def fit(X: DenseMatrix[Double]) = {
     require(nClusters <= X.rows, "number of data points must be <= to number of clusters")
     this.X = X
@@ -35,7 +50,7 @@ class Kmeans(val nClusters: Int,
 
     val (o, c, a, l) = runResults.sortBy(_._1).head
     this.objective = o
-    this.centers = c
+    this.centroids = c
     this.assignments = a
     this.labels = l
   }
@@ -90,6 +105,14 @@ class Kmeans(val nClusters: Int,
     (lastObjective, centroids, assignments, labels)
   }
 
-  def predict(X: DenseMatrix[Double]) = ???
+  /** Assigns the argument datapoints to clusters
+   *
+   * @param X the data points for which we want to assign to clusters
+   *
+   * @return the corresponding predicted labels for the data points
+   *
+   * TODO: Implement this!
+   */
+  def predict(X: DenseMatrix[Double]): DenseVector[Double] = ???
 
 }
