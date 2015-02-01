@@ -2,6 +2,16 @@ package smltk.cluster
 
 import breeze.linalg._
 
+/** Clustering is done using <a href="http://en.wikipedia.org/wiki/Lloyd%27s_algorithm">Lloyd's
+ * algorithm</a>. Worst case complexity of the algorithm is O(n^(k/p))
+ *
+ * @param nClusters the number of clusters to search for
+ * @param tolerance the relative tolerance with regards to inertia used to declare convergence
+ * @param maxIterations the maximum number of iterations in a single run. This helps avoid problems
+ * that don't converge
+ * @param nRuns number of times k-means will be run, each with different centroids. The final result
+ * of k-means will be the run that best minises the objective
+ */
 class Kmeans(val nClusters: Int,
   val tolerance: Double = 1e-5,
   val maxIterations: Int = 300,
