@@ -21,7 +21,7 @@ object ClassificationMetrics {
    *
    * @return the accuracy of a classifier's predictions.
    */
-  def accuracy(yTrue: DenseVector[Double], yPreds: DenseVector[Double], normalize: Boolean = true): Double = {
+  def accuracy(yTrue: DenseVector[Int], yPreds: DenseVector[Int], normalize: Boolean = true): Double = {
     require(yTrue.size == yPreds.size, "Both vectors must be of the same length")
     require(yTrue.size > 0, "Vector must not be empty")
 
@@ -29,5 +29,54 @@ object ClassificationMetrics {
     for (i <- 0 until yTrue.size; if yTrue(i)==yPreds(i)) count += 1
 
     if (normalize) count/yTrue.size else count
+  }
+
+  def precision(yTrue: DenseVector[Int], yPreds: DenseVector[Int],
+    posLabel: Int = 1): Double = {
+
+    require(yTrue.size == yPreds.size, "Both vectors must be of the same length")
+    require(yTrue.size > 0, "Vector must not be empty")
+
+    var (tp, tn, fp, fn) = confusions(yTrue, yPreds, posLabel=posLabel)
+    tp / (tp+fp)
+  }
+
+  def recall(yTrue: DenseVector[Int], yPreds: DenseVector[Int],
+    posLabel: Int = 1): Double = {
+
+    require(yTrue.size == yPreds.size, "Both vectors must be of the same length")
+    require(yTrue.size > 0, "Vector must not be empty")
+
+    var (tp, tn, fp, fn) = confusions(yTrue, yPreds, posLabel=posLabel)
+    tp / (tp+fn)
+  }
+
+  def fMeasure(yTrue: DenseVector[Int], yPreds: DenseVector[Int],
+    posLabel: Int = 1): Double = {
+
+    require(yTrue.size == yPreds.size, "Both vectors must be of the same length")
+    require(yTrue.size > 0, "Vector must not be empty")
+
+    val p = precision(yTrue, yPreds)
+    val r = recall(yTrue, yPreds)
+    2 * ( (p*r) / (p+r) )
+
+  }
+  private def confusions(yTrue: DenseVector[Int], yPreds: DenseVector[Int],
+    posLabel: Int = 1): (Double, Double, Double, Double) = {
+
+    require(yTrue.size == yPreds.size, "Both vectors must be of the same length")
+    require(yTrue.size > 0, "Vector must not be empty")
+
+    var (tp, tn, fp, fn) = (0, 0, 0, 0)
+    yTrue.toArray.zip(yPreds.toArray).foreach{ case (gold, pred) =>
+      if(gold == posLabel)
+        if(pred == gold) tp += 1 // true positive
+        else fn += 1 // false negative
+      else
+        if(pred == gold) tn += 1 // true negative
+        else fp += 1 // false positive
+    }
+    (tp, tn, fp, fn)
   }
 }
