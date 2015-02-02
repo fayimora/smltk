@@ -1,6 +1,6 @@
 import breeze.linalg._
 import smltk.linearmodel._
-import smltk.metrics.ClassificationMetrics.accuracy
+import smltk.metrics.ClassificationMetrics._
 
 object Playground extends App {
 
@@ -20,17 +20,25 @@ object Playground extends App {
   println(accuracy(DenseVector(1,2,3,4,5,6,7), DenseVector(1,2,3,4,5,6,12)))
   println(accuracy(DenseVector(1,2,3,4,5,6,7), DenseVector(1,2,3,4,5,6,12), normalize=false))
   // println(accuracy(DenseVector(), DenseVector()))
+  val yTrue = DenseVector(1,1,1,0,0,0,1)
+  val yPreds = DenseVector(1,1,1,1,0,0,1)
+  var (tp, tn, fp, fn) = confusions(yTrue, yPreds)
+  println("******************")
+  println(accuracy(yTrue, yPreds))
+  var acc  = (tp+tn) / (tp+tn+fp+fn)
+  println(acc)
+  println("******************")
   //
   println("==================== CLustering ====================")
 
   import smltk.cluster.Kmeans
-  X = DenseMatrix.rand[Double](200, 10)
-  // X = loadIris()
+  // X = DenseMatrix.rand[Double](200, 10)
+  X = loadIris()
   val pca = princomp(X)
   // val model = pca.loadings(0 until 2, ::)
   // val XNew = (model.t * model) * pca.center
 
-  val cl = new Kmeans(3, maxIterations=300, nRuns=5)
+  val cl = new Kmeans(3, maxIterations=1000, nRuns=20)
   cl.fit(pca.scores)
   println(cl.centroids)
   println(s"Objective: ${cl.objective}")
