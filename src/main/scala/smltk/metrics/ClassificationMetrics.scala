@@ -86,6 +86,8 @@ object ClassificationMetrics {
     2 * ( (p*r) / (p+r) )
 
   }
+
+  /* Return the true positives, true negatives, false positives and false negatives counts */
   private def confusions(yTrue: DenseVector[Int], yPreds: DenseVector[Int],
     posLabel: Int = 1): (Double, Double, Double, Double) = {
 
