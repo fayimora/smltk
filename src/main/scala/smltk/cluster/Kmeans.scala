@@ -1,6 +1,7 @@
 package smltk.cluster
 
 import breeze.linalg._
+import breeze.linalg.functions.euclideanDistance
 
 /** Clustering is done using <a href="http://en.wikipedia.org/wiki/Lloyd%27s_algorithm">Lloyd's
  * algorithm</a>. Worst case complexity of the algorithm is O(n^(k/p))
@@ -82,7 +83,7 @@ class Kmeans(val nClusters: Int,
       for(k <- 0 until nClusters) {
         val clustering: DenseMatrix[Double] = pointsBelongingTo(k)
         for(j <- 0 until clustering.rows)
-          objective += math.pow(norm((clustering(j,::) - centroids(k,::)).t), 2)
+          objective += math.pow(euclideanDistance(clustering(j,::).t, centroids(k,::).t), 2)
       }
       lastObjective = objective
       converged = math.abs(objective - lastObjective) >= tolerance
@@ -93,7 +94,7 @@ class Kmeans(val nClusters: Int,
     def assignLabels() {
       // compute distance between each data point and the centroids
       for(d <- 0 until X.rows; k <- 0 until nClusters){
-        assignments(d, k) = math.pow(norm( (centroids(k,::) - X(d,::)).t ), 2)
+        assignments(d, k) = math.pow(euclideanDistance(centroids(k,::).t, X(d,::).t ), 2)
         // assign allegiances
         val temp = assignments(d, ::)
         labels(d) = argmin(temp)
