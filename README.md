@@ -8,8 +8,8 @@ lines too.
 
 Contributions are certainly welcome! Just send a pull request.
 
-My hope is that after a few months of steady and daily improvements to this toolkit, it will be
-useful to other researchers in the field.
+Generally speaking, I'm doing this to better understand the algorithms. Maybe at some point other
+researchers will use this library :smile:
 
 
 ## Documentation
