@@ -31,6 +31,14 @@ object ClassificationMetrics {
     if (normalize) count/yTrue.size else count
   }
 
+  /** Computes the precision, also known as, positive predictive value.
+   * tp / (tp + fp)
+   *
+   * @param yTrue The correct labels, A.K.A Ground Truth
+   * @param yPreds The predicted labels, as returned by a classifier
+   *
+   * @return the precision of a classifier's predictions.
+   */
   def precision(yTrue: DenseVector[Int], yPreds: DenseVector[Int],
     posLabel: Int = 1): Double = {
 
@@ -41,6 +49,13 @@ object ClassificationMetrics {
     tp / (tp+fp)
   }
 
+  /** Computes the recall which is tp / (tp + fn)
+   *
+   * @param yTrue The correct labels, A.K.A Ground Truth
+   * @param yPreds The predicted labels, as returned by a classifier
+   *
+   * @return the recall of a classifier's predictions.
+   */
   def recall(yTrue: DenseVector[Int], yPreds: DenseVector[Int],
     posLabel: Int = 1): Double = {
 
@@ -51,6 +66,15 @@ object ClassificationMetrics {
     tp / (tp+fn)
   }
 
+  /** Computes the F1 Measure which is a harmonic mean between the precision and recall
+   *
+   * 2 * (precision + recall) / (precision * recall)
+   *
+   * @param yTrue The correct labels, A.K.A Ground Truth
+   * @param yPreds The predicted labels, as returned by a classifier
+   *
+   * @return the recall of a classifier's predictions.
+   */
   def fMeasure(yTrue: DenseVector[Int], yPreds: DenseVector[Int],
     posLabel: Int = 1): Double = {
 
