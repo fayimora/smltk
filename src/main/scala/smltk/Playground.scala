@@ -2,11 +2,22 @@ import breeze.linalg._
 import smltk.linearmodel._
 import smltk.neighbours.KNeighboursClassifier
 import smltk.metrics.ClassificationMetrics._
+import smltk.metrics.crossvalidation.KFold
 
 object Playground {
 
   def main(args: Array[String]) = {
-    clustering()
+    crossvalidation()
+  }
+
+  def crossvalidation(){
+    val kf = KFold(11, k=3, shuffle=true)
+    kf.getIndices.map { tuple =>
+      val (train, test) = (tuple._1, tuple._2)
+      println(s"Train Indices: ${train.mkString(", ")}")
+      println(s"Test Indices: ${test.mkString(", ")}")
+      println()
+    }
   }
 
   def knn() {
