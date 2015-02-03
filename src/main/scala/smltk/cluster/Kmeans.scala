@@ -120,10 +120,18 @@ class Kmeans(val nClusters: Int,
    *
    * @param X the data points for which we want to assign to clusters
    *
-   * @return the corresponding predicted labels for the data points
-   *
-   * TODO: Implement this!
+   * @return the corresponding predicted cluster for the data points. It does not return the actual
+   * value of the centroid but the cluster index.
    */
-  def predict(X: DenseMatrix[Double]): DenseVector[Double] = ???
+  def predict(X: DenseMatrix[Double]): DenseVector[Int] = {
+    import scala.collection.mutable.ArrayBuffer
+    val labels = ArrayBuffer.empty[Int]
+    for(i <- 0 until X.rows) {
+      val x = X(i, ::).t
+      val distances = centroids(*, ::).map( centroid => math.pow(euclideanDistance(x, centroid), 2))
+      labels(i) += argmin(distances)
+    }
+    DenseVector[Int](labels:_*)
+  }
 
 }
