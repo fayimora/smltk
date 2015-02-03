@@ -127,10 +127,9 @@ class Kmeans(val nClusters: Int,
   def predict(X: DenseMatrix[Double]): DenseVector[Int] = {
     import scala.collection.mutable.ArrayBuffer
     val labels = ArrayBuffer.empty[Int]
-    for(i <- 0 until X.rows) {
-      val x = X(i, ::).t
+    X(*, ::).map { x =>
       val distances = centroids(*, ::).map( centroid => math.pow(distanceFunc(x, centroid), 2))
-      labels(i) += argmin(distances)
+      labels += argmin(distances)
     }
     DenseVector[Int](labels:_*)
   }
