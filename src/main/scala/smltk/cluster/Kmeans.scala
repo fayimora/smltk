@@ -19,7 +19,7 @@ class Kmeans(val nClusters: Int,
   val nRuns: Int = 5) {
 
   /** The data on which we run k-means clustering */
-  var X: DenseMatrix[Double] = null
+  var X: DenseMatrix[Double] = _
 
   /** The number of data points */
   var nSamples = 0
@@ -28,12 +28,12 @@ class Kmeans(val nClusters: Int,
   var nFeats = 0
 
   /** The cluster centers of the clusters */
-  var centroids: DenseMatrix[Double] = null
+  var centroids: DenseMatrix[Double] = _
 
-  var assignments: DenseMatrix[Double] = null
+  var assignments: DenseMatrix[Double] = _
 
   /** The corespondint cluster number of each datapoint*/
-  var labels: DenseVector[Int] = null
+  var labels: DenseVector[Int] = _
 
   /** The value of the objective function Minimising this number is the aim of k-means */
   var objective = 0.0
