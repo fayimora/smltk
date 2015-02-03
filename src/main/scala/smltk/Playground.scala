@@ -11,7 +11,7 @@ object Playground {
   }
 
   def crossvalidation(){
-    val kf = KFold(11, k=3, shuffle=true)
+    val kf = KFold(14, k=3, shuffle=true)
     kf.getIndices.map { tuple =>
       val (train, test) = (tuple._1, tuple._2)
       println(s"Train Indices: ${train.mkString(", ")}")
