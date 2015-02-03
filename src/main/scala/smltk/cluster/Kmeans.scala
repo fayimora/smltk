@@ -31,6 +31,7 @@ class Kmeans(val nClusters: Int,
   var centroids: DenseMatrix[Double] = _
 
   var assignments: DenseMatrix[Double] = _
+  val distanceFunc = euclideanDistance
 
   /** The corespondint cluster number of each datapoint*/
   var labels: DenseVector[Int] = _
@@ -83,7 +84,7 @@ class Kmeans(val nClusters: Int,
       for(k <- 0 until nClusters) {
         val clustering: DenseMatrix[Double] = pointsBelongingTo(k)
         for(j <- 0 until clustering.rows)
-          objective += math.pow(euclideanDistance(clustering(j,::).t, centroids(k,::).t), 2)
+          objective += math.pow(distanceFunc(clustering(j,::).t, centroids(k,::).t), 2)
       }
       lastObjective = objective
       converged = math.abs(objective - lastObjective) >= tolerance
@@ -94,7 +95,7 @@ class Kmeans(val nClusters: Int,
     def assignLabels() {
       // compute distance between each data point and the centroids
       for(d <- 0 until X.rows; k <- 0 until nClusters){
-        assignments(d, k) = math.pow(euclideanDistance(centroids(k,::).t, X(d,::).t ), 2)
+        assignments(d, k) = math.pow(distanceFunc(centroids(k,::).t, X(d,::).t ), 2)
         // assign allegiances
         val temp = assignments(d, ::)
         labels(d) = argmin(temp)
@@ -128,7 +129,7 @@ class Kmeans(val nClusters: Int,
     val labels = ArrayBuffer.empty[Int]
     for(i <- 0 until X.rows) {
       val x = X(i, ::).t
-      val distances = centroids(*, ::).map( centroid => math.pow(euclideanDistance(x, centroid), 2))
+      val distances = centroids(*, ::).map( centroid => math.pow(distanceFunc(x, centroid), 2))
       labels(i) += argmin(distances)
     }
     DenseVector[Int](labels:_*)
