@@ -135,3 +135,12 @@ class Kmeans(val nClusters: Int,
   }
 
 }
+
+object Kmeans {
+  def apply(nClusters: Int,
+    tolerance: Double = 1e-5,
+    maxIterations: Int = 300,
+    nRuns: Int = 5) = {
+      new Kmeans(nClusters, tolerance=tolerance, maxIterations=maxIterations, nRuns=nRuns)
+  }
+}

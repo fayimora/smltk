@@ -1,5 +1,6 @@
 import breeze.linalg._
 import smltk.linearmodel._
+import smltk.cluster._
 import smltk.neighbours.KNeighboursClassifier
 import smltk.metrics.ClassificationMetrics._
 import smltk.metrics.crossvalidation.KFold
@@ -7,7 +8,7 @@ import smltk.metrics.crossvalidation.KFold
 object Playground {
 
   def main(args: Array[String]) = {
-    crossvalidation()
+    clustering()
   }
 
   def crossvalidation(){
@@ -58,7 +59,6 @@ object Playground {
   }
 
   def clustering() {
-    import smltk.cluster.Kmeans
     println("==================== CLustering ====================")
     // X = DenseMatrix.rand[Double](200, 10)
     val X = loadIris()
@@ -66,7 +66,7 @@ object Playground {
     // val model = pca.loadings(0 until 2, ::)
     // val XNew = (model.t * model) * pca.center
 
-    val cl = new Kmeans(3, maxIterations=1000, nRuns=20)
+    val cl = Kmeans(3, maxIterations=1000, nRuns=5)
     cl.fit(pca.scores)
     println(cl.centroids)
     println(s"Objective: ${cl.objective}")
