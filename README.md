@@ -3,7 +3,7 @@ This is a general purpose ML toolkit for Scala. I love Scala and I don't get to 
 anymore. To solve that problem, I have decided to build a toolkit for ML in Scala.
 
 I know there are a few of them out there but I really do not like their interface. I think python's
-[scikit-learn]() is an amazing package with a nice API and so I will build this library along those
+[scikit-learn](http://scikit-learn.org/) is an amazing package with a nice API and so I will build this library along those
 lines too.
 
 Contributions are certainly welcome! Just send a pull request.
