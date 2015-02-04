@@ -24,14 +24,14 @@ object Playground {
   def knn() {
     val X = loadIris()
     val y = DenseVector((for (i <- 0 until 150) yield { if(i<50) 1 else if(i<100) 2 else 3 }):_* )
-    val neigh = new KNeighboursClassifier(nNeighbours=20)
+    val neigh = KNeighboursClassifier(nNeighbours=20)
     neigh.fit(X, y)
     println(neigh.predict(X(0 until 150, ::)))
   }
 
   def linearmodels() {
-    val N = 20000
-    val D = 1000
+    val N = 200
+    val D = 10
     val X = DenseMatrix.rand[Double](N, D)
     val y = DenseVector.rand[Double](N)
     val linReg = LinearRegression()
