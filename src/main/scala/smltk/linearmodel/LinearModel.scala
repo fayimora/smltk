@@ -43,12 +43,11 @@ trait LinearModel {
    * @param X the test dataset
    * @param yTrue the true values
    *
-   * @return the Mean Squared Error \sum_i (y_i - \hat{y_i})^2
+   * @return the Mean Squared Error (1/N) \sum_i (y_i - \hat{y_i})^2
    */
   def score(X: DenseMatrix[Double], yTrue: DenseVector[Double]): Double = {
-    var mse = 0.0
+    import smltk.metrics.RegressionMetrics.mse_score
     val yPreds = predict(X)
-    for (i <- 0 until yTrue.size) mse += math.pow(yTrue(i) - yPreds(i), 2)
-    mse
+    mse_score(yTrue, yPreds)
   }
 }
