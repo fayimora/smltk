@@ -16,3 +16,10 @@ class RidgeRegression(val lambda: Double) extends LinearModel {
 
   def predict(x: Transpose[DenseVector[Double]]): Double = x * weights
 }
+
+object RidgeRegression {
+  def apply(lambda: Double) = {
+    new RidgeRegression(lambda)
+  }
+}
+
