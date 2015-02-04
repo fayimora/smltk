@@ -15,9 +15,9 @@ class KNeighboursClassifier(val nNeighbours: Int = 5){
   }
 
   def predict(X: DenseMatrix[Double]): DenseVector[Int] = {
-    import scala.collection.mutable.ArrayBuffer
-    val labels = ArrayBuffer.empty[Int]
-    for(i <- 0 until X.rows) {
+    // import scala.collection.mutable.ArrayBuffer
+    // val labels = ArrayBuffer.empty[Int]
+    val labels = for(i <- 0 until X.rows) yield {
       // compute distance between each point and other points
       val distances = for(j <- 0 until X.rows) yield distanceFunc(this.X(i,::).t, X(j,::).t)
       // take the top k distances which are the k smallest distances
@@ -27,7 +27,8 @@ class KNeighboursClassifier(val nNeighbours: Int = 5){
       // get votes for each possible label of these points
       val freqCounts = idxs.map(i => y(i)).groupBy(n => n).map(tup => (tup._1, tup._2.size))
       // The label with highest votes wins. TODO: what happens when there is a draw?
-      labels += freqCounts.maxBy(tup => tup._2)._1
+      // labels += freqCounts.maxBy(tup => tup._2)._1
+      freqCounts.maxBy(tup => tup._2)._1
     }
     DenseVector[Int](labels:_*)
   }

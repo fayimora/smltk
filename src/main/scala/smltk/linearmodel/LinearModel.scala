@@ -34,8 +34,9 @@ trait LinearModel {
    * @return a column vector of predicted values
    */
   def predict(X: DenseMatrix[Double]): DenseVector[Double] = {
-    val results = for (i <- 0 until X.rows) yield predict(X(i, ::))
-    DenseVector[Double](results.toArray)
+    X(*, ::).map(x => predict(x.t))
+    // val results = for (i <- 0 until X.rows) yield predict(X(i, ::))
+    // DenseVector[Double](results)
   }
 
   /** This function computes the Residual Sum of Squared Errors for this regressor
