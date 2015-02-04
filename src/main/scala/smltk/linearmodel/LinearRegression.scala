@@ -16,3 +16,9 @@ class LinearRegression extends LinearModel {
 
   def predict(x: Transpose[DenseVector[Double]]): Double = x * weights
 }
+
+object LinearRegression {
+  def apply() = {
+    new LinearRegression()
+  }
+}

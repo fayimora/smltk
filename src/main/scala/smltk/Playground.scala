@@ -8,7 +8,7 @@ import smltk.metrics.crossvalidation.KFold
 object Playground {
 
   def main(args: Array[String]) = {
-    clustering()
+    linearmodels()
   }
 
   def crossvalidation(){
@@ -30,13 +30,16 @@ object Playground {
   }
 
   def linearmodels() {
-    val X = DenseMatrix.rand[Double](2000, 10)
-    val y = DenseVector.rand[Double](200)
-    val linReg = new LinearRegression()
+    val N = 20000
+    val D = 1000
+    val X = DenseMatrix.rand[Double](N, D)
+    val y = DenseVector.rand[Double](N)
+    val linReg = LinearRegression()
     println (linReg.fit(X, y))
     println (linReg.score(X, y))
 
-    val ridgeReg = new RidgeRegression(0.005)
+    println("COmputing y with Ridge Regression")
+    val ridgeReg = new RidgeRegression(0.001)
     println (ridgeReg.fit(X, y))
     println (ridgeReg.score(X, y))
 
