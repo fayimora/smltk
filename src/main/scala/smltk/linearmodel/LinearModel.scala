@@ -38,16 +38,16 @@ trait LinearModel {
     DenseVector[Double](results.toArray)
   }
 
-  /** This function computes the Mean Squared Error for this regressor
+  /** This function computes the Residual Sum of Squared Errors for this regressor
    *
    * @param X the test dataset
    * @param yTrue the true values
    *
-   * @return the Mean Squared Error (1/N) \sum_i (y_i - \hat{y_i})^2
+   * @return the residual sum of squares \sum_i (y_i - \hat{y_i})^2
    */
   def score(X: DenseMatrix[Double], yTrue: DenseVector[Double]): Double = {
-    import smltk.metrics.RegressionMetrics.mse_score
+    import smltk.metrics.RegressionMetrics.rss_score
     val yPreds = predict(X)
-    mse_score(yTrue, yPreds)
+    rss_score(yTrue, yPreds)
   }
 }
