@@ -14,5 +14,5 @@ researchers will use this library :smile:
 
 ## Documentation
 I will do my best to write very detailed documentation as I implement this toolkit and also create a
-repository for examples. However, as this librry is ver much alpha, these examples will come a bit
+repository for examples. However, as this library is very much alpha, these examples will come a bit
 later when I have settled on a nice API.
