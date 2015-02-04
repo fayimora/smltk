@@ -8,7 +8,7 @@ import smltk.metrics.crossvalidation.KFold
 object Playground {
 
   def main(args: Array[String]) = {
-    linearmodels()
+    knn()
   }
 
   def crossvalidation(){

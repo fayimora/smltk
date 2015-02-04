@@ -32,3 +32,9 @@ class KNeighboursClassifier(val nNeighbours: Int = 5){
     DenseVector[Int](labels:_*)
   }
 }
+
+object KNeighboursClassifier {
+  def apply(nNeighbours: Int=5) = {
+    new KNeighboursClassifier(nNeighbours)
+  }
+}
