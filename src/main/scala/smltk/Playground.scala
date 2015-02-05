@@ -8,16 +8,16 @@ import smltk.metrics.crossvalidation.KFold
 object Playground {
 
   def main(args: Array[String]) = {
-    linearmodels()
+    // linearmodels()
     crossvalidation()
-    knn()
-    metrics()
-    clustering()
+    // knn()
+    // metrics()
+    // clustering()
   }
 
   def crossvalidation(){
     val kf = KFold(14, k=3, shuffle=true)
-    kf.getIndices.map { tuple =>
+    kf.map { tuple =>
       val (train, test) = (tuple._1, tuple._2)
       println(s"Train Indices: ${train.mkString(", ")}")
       println(s"Test Indices: ${test.mkString(", ")}")
