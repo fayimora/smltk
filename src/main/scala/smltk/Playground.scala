@@ -9,8 +9,8 @@ object Playground {
 
   def main(args: Array[String]) = {
     // linearmodels()
-    crossvalidation()
-    // knn()
+    // crossvalidation()
+    knn()
     // metrics()
     // clustering()
   }
