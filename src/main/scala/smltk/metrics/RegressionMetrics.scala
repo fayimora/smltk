@@ -11,20 +11,16 @@ import math.{abs, pow}
 
 object RegressionMetrics {
   def mae_score(yTrue: DenseVector[Double], yPreds: DenseVector[Double]): Double = {
-    var mae = 0.0
-    for (i <- 0 until yTrue.size) mae += abs(yTrue(i) - yPreds(i))
+    var mae = 0.0 + sum(abs(yTrue - yPreds))
     mae/yTrue.size
   }
 
   def rss_score(yTrue: DenseVector[Double], yPreds: DenseVector[Double]): Double = {
-    var rss = 0.0
-    for (i <- 0 until yTrue.size) rss += math.pow(yTrue(i) - yPreds(i), 2)
+    var rss = 0.0 + sum((yTrue - yPreds) :^2)
     rss
   }
 
   def mse_score(yTrue: DenseVector[Double], yPreds: DenseVector[Double]): Double = {
-    var mse = 0.0
-    for (i <- 0 until yTrue.size) mse += math.pow(yTrue(i) - yPreds(i), 2)
-    mse/yTrue.size
+    rss_score(yTrue, yPreds)/yTrue.size
   }
 }
