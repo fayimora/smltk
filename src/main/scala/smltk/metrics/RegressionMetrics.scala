@@ -1,10 +1,9 @@
 package smltk.metrics
 
 import breeze.linalg._
-import math.{abs, pow}
+import breeze.numerics._
 
-/** This implements several scores, losses and utility functions to measure regression
- * preformance
+/** This implements several scores, losses and utility functions to measure regression preformance
  *
  * @author Fayimora Femi-Balogun
  */
@@ -16,7 +15,7 @@ object RegressionMetrics {
   }
 
   def rss_score(yTrue: DenseVector[Double], yPreds: DenseVector[Double]): Double = {
-    var rss = 0.0 + sum((yTrue - yPreds) :^2)
+    var rss = 0.0 + sum((yTrue - yPreds) :^ 2)
     rss
   }
 
