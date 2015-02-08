@@ -15,6 +15,10 @@ class LinearRegression extends LinearModel {
   }
 
   def predict(x: Transpose[DenseVector[Double]]): Double = x * weights
+
+  def predict(X: DenseMatrix[Double]): DenseVector[Double] = {
+    X(*, ::).map( x => predict(x.t))
+  }
 }
 
 object LinearRegression {
