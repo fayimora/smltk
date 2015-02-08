@@ -15,7 +15,7 @@ object RegressionMetrics {
   }
 
   def rss_score(yTrue: DenseVector[Double], yPreds: DenseVector[Double]): Double = {
-    var rss = 0.0 + sum((yTrue - yPreds) :^ 2)
+    var rss = 0.0 + sum((yTrue - yPreds) :^ 2.0)
     rss
   }
 
