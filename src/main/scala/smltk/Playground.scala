@@ -4,6 +4,7 @@ import smltk.cluster._
 import smltk.neighbours.KNeighboursClassifier
 import smltk.metrics.ClassificationMetrics._
 import smltk.metrics.crossvalidation.KFold
+import smltk.datasets._
 
 object Playground {
 
@@ -26,8 +27,9 @@ object Playground {
   }
 
   def knn() {
-    val X = loadIris()
-    val y = DenseVector((for (i <- 0 until 150) yield { if(i<50) 1 else if(i<100) 2 else 3 }):_* )
+    val data = loadIris()
+    val X = data._1
+    val y = data._2
     val neigh = KNeighboursClassifier(nNeighbours=20)
     neigh.fit(X, y)
     println(neigh.predict(X(0 until 150, ::)))
@@ -68,7 +70,9 @@ object Playground {
   def clustering() {
     println("==================== CLustering ====================")
     // X = DenseMatrix.rand[Double](200, 10)
-    val X = loadIris()
+    val data = loadIris()
+    val X = data._1
+    val y = data._2
     val pca = princomp(X)
     // val model = pca.loadings(0 until 2, ::)
     // val XNew = (model.t * model) * pca.center
@@ -78,13 +82,5 @@ object Playground {
     println(cl.centroids)
     println(s"Objective: ${cl.objective}")
     println(cl.labels)
-  }
-
-  def loadIris(): DenseMatrix[Double] = {
-    import com.github.tototoshi.csv._
-    import java.io.File
-    val reader = CSVReader.open(new File("/Users/fayimora/Misc/iris.csv"))
-    val ls = reader.all.map(_.dropRight(1).map(_.toDouble).toArray)
-    DenseMatrix(ls:_*)
   }
 }
