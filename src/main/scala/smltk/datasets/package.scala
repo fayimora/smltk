@@ -16,7 +16,7 @@ package object datasets {
   def loadIris(): (DenseMatrix[Double], DenseVector[Int]) = {
     val data = fromFile(BASE_FOLDER+"iris.csv").getLines
     val X = data.map(l => l.split(",").dropRight(1).map(_.toDouble)).toArray
-    val y = DenseVector((for (i <- 0 until 150) yield { if(i<50) 1 else if(i<100) 2 else 3 }):_* )
+    val y = DenseVector((for (i <- 0 until 150) yield { if(i<50) 0 else if(i<100) 1 else 2 }):_* )
     (DenseMatrix(X:_*), y)
   }
 
