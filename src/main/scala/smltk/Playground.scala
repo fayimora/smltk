@@ -18,7 +18,7 @@ object Playground {
   }
 
   def logistic() {
-    val data = loadIris()
+    val data = iris()
     val X = data._1
     val y = data._2
     val clf = LogisticRegression()
@@ -36,7 +36,7 @@ object Playground {
   }
 
   def knn() {
-    val data = loadIris()
+    val data = iris()
     val X = data._1
     val y = data._2
     val neigh = KNeighboursClassifier(nNeighbours=20)
@@ -79,7 +79,7 @@ object Playground {
   def clustering() {
     println("==================== CLustering ====================")
     // X = DenseMatrix.rand[Double](200, 10)
-    val data = loadIris()
+    val data = iris()
     val X = data._1
     val y = data._2
     val pca = princomp(X)
