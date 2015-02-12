@@ -9,11 +9,20 @@ import smltk.datasets._
 object Playground {
 
   def main(args: Array[String]) = {
+    logistic()
     // linearmodels()
     // crossvalidation()
-    knn()
+    // knn()
     // metrics()
     // clustering()
+  }
+
+  def logistic() {
+    val data = loadIris()
+    val X = data._1
+    val y = data._2
+    val clf = LogisticRegression()
+    clf.fit(X, y, 3)
   }
 
   def crossvalidation(){
