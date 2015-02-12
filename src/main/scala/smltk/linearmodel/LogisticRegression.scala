@@ -41,8 +41,9 @@ class LogisticRegression {
       }
     }
 
+    // val initWeights = DenseVector.zeros[Double](k * nFeats)
     val initWeights = DenseVector.rand(k * nFeats)
-    val params = OptParams()
+    val params = OptParams(tolerance = 1E-6)
     weights = minimize(objective, initWeights, params).toDenseMatrix.reshape(k, nFeats)
     println("returned result")
     println(weights)
