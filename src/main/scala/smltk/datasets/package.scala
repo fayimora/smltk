@@ -1,13 +1,30 @@
 package smltk
 
 import breeze.linalg.{DenseMatrix, DenseVector}
-import com.github.tototoshi.csv.{CSVReader, DefaultCSVFormat}
 import java.io.File
 import scala.io.Source._
+import smltk.utils.GZIterator
 
 package object datasets {
 
   val BASE_FOLDER = "src/main/resources/datasets/"
+
+  /** Loads the MNIST dataset.
+   *
+   * @param full specifies if the full 10 digits should be loaded. If false, the train data only
+   * contains labels 1, 2 and 3
+   *
+   * @return a tuple of the pixels and corresponding labels
+   */
+  def loadMnist(full: Boolean = true): (DenseMatrix[Double], DenseVector[Int]) = {
+    val suffix = if(full) "mnist-train.dat.gz" else "mnist123-train.dat.gz"
+    val data = GZIterator(BASE_FOLDER+suffix)
+    val fullMatrix = data.map(_.split("\\s+").map(_.toDouble)).toIndexedSeq
+    val mat = DenseMatrix(fullMatrix:_*)
+    val y = mat(::, 0).map(_.toInt)
+    val X = mat(::, 1 until mat.cols)
+    (X, y)
+  }
 
   /** Loads the iris dataset found at https://archive.ics.uci.edu/ml/datasets/Iris
    *
