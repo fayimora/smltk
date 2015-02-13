@@ -1,6 +1,6 @@
 name := "Scala Machine Learning Toolkit"
 
-organization := "com.fayimora.smltk"
+organization := "smltk"
 
 version := "0.0.1"
 
