@@ -36,10 +36,10 @@ class KNeighboursClassifier(val nNeighbours: Int = 5){
     val idxs = topKDistances.map(distances indexOf)
 
     // get votes for each possible label of these points
-    val votes = idxs.map(i => y(i)).groupBy(n => n).map(tup => (tup._1, tup._2.size))
+    val votes = idxs.map(i => y(i)).groupBy(n => n)
 
     // The label with highest votes wins. TODO: what happens when there is a draw?
-    votes.maxBy(tup => tup._2)._1
+    votes.maxBy(tup => tup._2.size)._1
   }
 
   /** This function computes the classes of each datapoint in the argument matrix.
