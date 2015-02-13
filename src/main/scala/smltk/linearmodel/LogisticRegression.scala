@@ -10,11 +10,13 @@ class LogisticRegression {
   var weights: DenseMatrix[Double] = _
   var nSamples = 0
   var nFeats = 0
+  var k = 0
 
-  def fit(X: DenseMatrix[Double], y: DenseVector[Int], k: Int) = {
+  def fit(X: DenseMatrix[Double], y: DenseVector[Int]) = {
     this.X = X
     nSamples = X.rows
     nFeats = X.cols
+    k = y.toArray.distinct.size
 
     val objective = new DiffFunction[DenseVector[Double]] {
       def calculate(thetas: DenseVector[Double]) = {
@@ -49,8 +51,21 @@ class LogisticRegression {
     println(weights)
   }
 
-  def predict() = {
+  def predict(x: Transpose[DenseVector[Double]]) = {}
+
+  /** This function computes the accuracy of this classifier
+   *
+   * @param X the test dataset
+   * @param yTrue the true values
+   *
+   * @return the accuracy given test examples
+   */
+  def score(X: DenseMatrix[Double], yTrue: DenseVector[Double]): Double = {
+    import smltk.metrics.RegressionMetrics.accuracy
+    val yPreds = predict(X)
+    accuracy(yTrue, yPreds)
   }
+
 }
 
 object LogisticRegression {
