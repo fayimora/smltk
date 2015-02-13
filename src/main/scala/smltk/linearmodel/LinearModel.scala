@@ -27,6 +27,7 @@ trait LinearModel {
    * @return a real valued number which is the prediction for the argument instance
    */
   def predict(x: Transpose[DenseVector[Double]]): Double
+  def predict(x: DenseVector[Double]): Double = predict(x.t)
 
   /** This function computes the predictions for multiple instances
    * @param X input matrix, each row is a single instance
