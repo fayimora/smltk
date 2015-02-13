@@ -18,11 +18,11 @@ object Playground {
   }
 
   def logistic() {
-    val data = iris()
+    val data = mnist()
     val X = data._1
     val y = data._2
     val clf = LogisticRegression()
-    clf.fit(X, y, 3)
+    clf.fit(X, y)
   }
 
   def crossvalidation(){
