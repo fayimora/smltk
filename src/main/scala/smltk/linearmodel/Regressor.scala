@@ -2,7 +2,7 @@ package smltk.linearmodel
 
 import breeze.linalg._
 
-trait LinearModel {
+trait Regressor {
 
   /** The weights of the model. This is in fact the model*/
   var weights = DenseVector[Double]()

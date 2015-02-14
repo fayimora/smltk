@@ -54,7 +54,7 @@ object Playground {
     println (linReg.score(X, y))
 
     println("COmputing y with Ridge Regression")
-    val ridgeReg = RidgeRegression(0.001)
+    val ridgeReg = LinearRegression(0.001)
     println (ridgeReg.fit(X, y))
     println (ridgeReg.score(X, y))
 
