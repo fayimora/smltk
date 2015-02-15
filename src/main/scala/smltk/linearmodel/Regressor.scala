@@ -19,7 +19,7 @@ trait Regressor {
    *
    * @return the computed weights. It is also stored as an instance variable
    */
-  def fit(X: DenseMatrix[Double], y: DenseVector[Double]): DenseVector[Double]
+  def fit(X: DenseMatrix[Double], y: DenseVector[Double])
 
   /** This function computes the prediction of a single instance of data
    * @param x a row vector which is also a single instance

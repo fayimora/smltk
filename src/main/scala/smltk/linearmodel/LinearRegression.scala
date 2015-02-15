@@ -5,7 +5,7 @@ import breeze.numerics._
 
 class LinearRegression(lambda: Double = 0.0) extends Regressor {
 
-  def fit(X: DenseMatrix[Double], y: DenseVector[Double]): DenseVector[Double] = {
+  def fit(X: DenseMatrix[Double], y: DenseVector[Double]) = {
     // Setup instnce variables
     nSamples = X.rows
     nFeats = X.cols
