@@ -5,12 +5,16 @@ import breeze.optimize._
 import breeze.optimize.FirstOrderMinimizer._
 import breeze.numerics._
 
-class LogisticRegression {
+class LogisticRegression extends Classifier {
   var X: DenseMatrix[Double] = _
   var weights: DenseMatrix[Double] = _
-  var nSamples = 0
-  var nFeats = 0
-  var k = 0
+
+  /** The number of samples in the dataset */
+  // var nSamples = 0
+
+  /** The number of features in the dataset */
+  // var nFeats = 0
+
 
   def fit(X: DenseMatrix[Double], y: DenseVector[Int]) = {
     this.X = X
@@ -51,7 +55,7 @@ class LogisticRegression {
     println(weights)
   }
 
-  def predict(x: Transpose[DenseVector[Double]]) = {}
+  override def predict(x: Transpose[DenseVector[Double]]): Int = ???
 
   /** This function computes the accuracy of this classifier
    *
@@ -60,8 +64,8 @@ class LogisticRegression {
    *
    * @return the accuracy given test examples
    */
-  def score(X: DenseMatrix[Double], yTrue: DenseVector[Double]): Double = {
-    import smltk.metrics.RegressionMetrics.accuracy
+  def score(X: DenseMatrix[Double], yTrue: DenseVector[Int]): Double = {
+    import smltk.metrics.ClassificationMetrics.accuracy
     val yPreds = predict(X)
     accuracy(yTrue, yPreds)
   }
