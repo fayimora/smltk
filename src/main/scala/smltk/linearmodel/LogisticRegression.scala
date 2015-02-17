@@ -57,6 +57,10 @@ class LogisticRegression extends Classifier {
 
   override def predict(x: Transpose[DenseVector[Double]]): Int = ???
 
+  def log_probabilities(x: Transpose[DenseVector[Double]]): Double = ???
+  def log_probabilities(x: DenseVector[Double]): Double = ???
+  def log_probabilities(X: DenseMatrix[Double]): Double = ???
+
   /** This function computes the accuracy of this classifier
    *
    * @param X the test dataset
