@@ -8,6 +8,7 @@ import breeze.numerics._
 class LogisticRegression extends Classifier {
   var X: DenseMatrix[Double] = _
   var weights: DenseMatrix[Double] = _
+  var log_probabilities: DenseVector[Double] = _
 
   /** The number of samples in the dataset */
   // var nSamples = 0
@@ -57,9 +58,9 @@ class LogisticRegression extends Classifier {
 
   override def predict(x: Transpose[DenseVector[Double]]): Int = ???
 
-  def log_probabilities(x: Transpose[DenseVector[Double]]): Double = ???
-  def log_probabilities(x: DenseVector[Double]): Double = ???
-  def log_probabilities(X: DenseMatrix[Double]): Double = ???
+  // def log_probabilities(x: Transpose[DenseVector[Double]]): Double = ???
+  // def log_probabilities(x: DenseVector[Double]): Double = ???
+  // def log_probabilities(X: DenseMatrix[Double]): Double = ???
 
   /** This function computes the accuracy of this classifier
    *
