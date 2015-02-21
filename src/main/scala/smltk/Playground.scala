@@ -5,16 +5,25 @@ import smltk.neighbours.KNeighboursClassifier
 import smltk.metrics.ClassificationMetrics._
 import smltk.metrics.crossvalidation.KFold
 import smltk.datasets._
+import smltk.extraction.text._
 
 object Playground {
 
   def main(args: Array[String]) = {
-    logistic()
+    countVectorizer()
+    // logistic()
     // linearmodels()
     // crossvalidation()
     // knn()
     // metrics()
     // clustering()
+  }
+
+  def countVectorizer() {
+    val vect = new CountVectorizer(ngramRange=(1,2))
+    val corpus = IndexedSeq("my name is fayi", "her name is wene", "i love my siblings",
+      "wene certainly loves me", "i love her too")
+    println(vect.fit_transform(corpus))
   }
 
   def logistic() {
