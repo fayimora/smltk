@@ -20,9 +20,10 @@ object Playground {
   }
 
   def countVectorizer() {
-    val vect = new CountVectorizer(ngramRange=(1,2))
+    val vect = new CountVectorizer(ngramRange=(1, 3))
     val corpus = IndexedSeq("my name is fayi", "her name is wene", "i love my siblings",
       "wene certainly loves me", "i love her too")
+    println(vect.toFeatures(corpus))
     println(vect.fit_transform(corpus))
   }
 
