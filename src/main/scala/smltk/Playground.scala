@@ -10,13 +10,22 @@ import smltk.extraction.text._
 object Playground {
 
   def main(args: Array[String]) = {
-    countVectorizer()
+    tfIdfVectorizer()
+    // countVectorizer()
     // logistic()
     // linearmodels()
     // crossvalidation()
     // knn()
     // metrics()
     // clustering()
+  }
+
+  def tfIdfVectorizer() {
+    val vect = new TfIdfVectorizer(ngramRange=(1, 2))
+    val corpus = IndexedSeq("my name is fayi", "her name is wene", "i love my siblings",
+      "wene certainly loves me", "i love her too")
+    println(vect.toFeatures(corpus))
+    println(vect.fit_transform(corpus))
   }
 
   def countVectorizer() {
