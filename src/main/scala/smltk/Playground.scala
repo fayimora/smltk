@@ -25,7 +25,7 @@ object Playground {
     val corpus = IndexedSeq("my name is fayi", "her name is wene", "i love my siblings",
       "wene certainly loves me", "i love her too")
     println(vect.toFeatures(corpus))
-    println(vect.fit_transform(corpus))
+    println(vect.fitTransform(corpus))
   }
 
   def countVectorizer() {
@@ -33,7 +33,7 @@ object Playground {
     val corpus = IndexedSeq("my name is fayi", "her name is wene", "i love my siblings",
       "wene certainly loves me", "i love her too")
     println(vect.toFeatures(corpus))
-    println(vect.fit_transform(corpus))
+    println(vect.fitTransform(corpus))
   }
 
   def logistic() {

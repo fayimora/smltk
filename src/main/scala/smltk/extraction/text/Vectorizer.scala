@@ -1,14 +1,14 @@
 package smltk.extraction.text
 
 import breeze.linalg.{DenseMatrix}
+import scala.util.matching.Regex.Match
 
 trait Vectorizer[T] {
 
-  type Compiler = CharSequence => Iterator[scala.util.matching.Regex.Match]
-  var compiler: Compiler = _
+  var compiler: CharSequence => Iterator[Match] = _
   val ngramRange = (1, 1)
 
-  def fit_transform(documents: IndexedSeq[String]): DenseMatrix[T]
+  def fitTransform(documents: IndexedSeq[String]): DenseMatrix[T]
 
   def toFeatures(sequence: IndexedSeq[String]): IndexedSeq[IndexedSeq[String]] = {
     for(seq <- sequence) yield toFeatures(seq)

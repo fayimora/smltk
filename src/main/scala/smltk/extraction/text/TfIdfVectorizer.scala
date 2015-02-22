@@ -9,7 +9,7 @@ class TfIdfVectorizer(override val ngramRange: (Int, Int) = (1, 1),
 
   compiler = pattern.r.findAllMatchIn _
 
-  override def fit_transform(documents: IndexedSeq[String]): DenseMatrix[Double] = {
+  override def fitTransform(documents: IndexedSeq[String]): DenseMatrix[Double] = {
     val uniqueTokens = toFeatures(documents).flatten.distinct
     val tf = ArrayBuffer.empty[IndexedSeq[Double]]
     val idf = ArrayBuffer.empty[IndexedSeq[Double]]
