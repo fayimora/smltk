@@ -20,13 +20,13 @@ class TfIdfVectorizer(override val ngramRange: (Int, Int) = (1, 1),
       counters += counter
       tf += uniqueTokens.map(tok => counter(tok)+0.0)
     }
-    for(doc <- documents) {
+
+    for(doc <- documents)
       idf += uniqueTokens.map(tok => documents.size / (1.0 + counters.count(c => c(tok) != 0)))
-    }
+
     val tfIdf = (DenseMatrix(tf:_*)) :* log(DenseMatrix(idf:_*))
     tfIdf
   }
 
 }
-
 

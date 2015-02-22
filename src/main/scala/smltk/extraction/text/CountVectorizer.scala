@@ -1,6 +1,6 @@
 package smltk.extraction.text
 
-import breeze.linalg.{Counter, DenseVector, DenseMatrix}
+import breeze.linalg.{Counter, DenseMatrix}
 
 class CountVectorizer(override val ngramRange: (Int, Int) = (1, 1),
                       val pattern: String = "(?u)\\b\\w\\w+\\b") extends Vectorizer[Int] {

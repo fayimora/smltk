@@ -21,3 +21,4 @@ trait Vectorizer[T] {
   }
 
 }
+
