@@ -5,7 +5,8 @@ import breeze.numerics.log
 import scala.collection.mutable.ArrayBuffer
 
 class TfIdfVectorizer(override val ngramRange: (Int, Int) = (1, 1),
-                      val pattern: String = "(?u)\\b\\w\\w+\\b") extends Vectorizer[Double] {
+                      val pattern: String = "(?u)\\b\\w\\w+\\b",
+                      override val lowerCase: Boolean = true) extends Vectorizer[Double] {
 
   compiler = pattern.r.findAllMatchIn _
 

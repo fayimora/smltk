@@ -7,6 +7,7 @@ trait Vectorizer[T] {
 
   var compiler: CharSequence => Iterator[Match] = _
   val ngramRange = (1, 1)
+  val lowerCase = true
 
   def fitTransform(documents: IndexedSeq[String]): DenseMatrix[T]
 
@@ -15,7 +16,9 @@ trait Vectorizer[T] {
   }
 
   def toFeatures(str: String): IndexedSeq[String] = {
-    val tokenised = compiler(str).map(_.toString).toIndexedSeq
+    val tokenised = compiler(str).map{ s =>
+      if(lowerCase) s.toString.toLowerCase else s.toString
+    }.toIndexedSeq
     val lsOfLists = for(i <- ngramRange._1 to ngramRange._2) yield tokenised.sliding(i).toIndexedSeq
     lsOfLists.flatten.map(_.mkString(" "))
   }
