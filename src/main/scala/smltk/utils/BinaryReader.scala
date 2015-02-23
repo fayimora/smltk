@@ -1,3 +1,5 @@
+package smltk.utils
+
 import java.io._
 import scala.Array
 import scala.collection.mutable.ArrayBuffer
@@ -48,9 +50,9 @@ class BinaryReader(val file: File, val gz: Boolean = false) {
   /** Read next 4 bytes as a floating-point number.
     * @return The floating-point value of the next 4 bytes.
     */
-  def readFloat(): Float = {
+   def readDouble(): Double = {
     // We need to reverse the byte order here due to endian-compatibility.
-    java.lang.Float.intBitsToFloat(java.lang.Integer.reverseBytes(dis.readInt()))
+    java.lang.Float.intBitsToFloat(java.lang.Integer.reverseBytes(dis.readInt())).toDouble
   }
 
 }
