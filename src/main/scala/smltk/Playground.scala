@@ -10,7 +10,8 @@ import smltk.extraction.text._
 object Playground {
 
   def main(args: Array[String]) = {
-    tfIdfVectorizer()
+    word2vec()
+    // tfIdfVectorizer()
     // countVectorizer()
     // logistic()
     // linearmodels()
@@ -18,6 +19,12 @@ object Playground {
     // knn()
     // metrics()
     // clustering()
+  }
+
+  def word2vec() {
+    val model = new Word2Vec()
+    model.load("/Users/fayimora/Misc/word2vec-scala/vectors.bin")
+    println(model.vocab.get("people"))
   }
 
   def tfIdfVectorizer() {
