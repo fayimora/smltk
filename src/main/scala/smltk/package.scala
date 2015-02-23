@@ -2,7 +2,7 @@ package smltk
 
 import breeze.linalg.{Tensor, DenseMatrix, DenseVector, Transpose}
 
-object Types {
+object smltk {
 
   // Basic convenience Vector and Matrix types
   // Still contemplating whether I want to use stuff like this
