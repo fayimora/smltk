@@ -5,12 +5,10 @@ import scala.Array
 import scala.collection.mutable.ArrayBuffer
 
 /** A simple binary file reader.
-  * @constructor Create a binary file reader.
   * @param file The binary file to be read.
   *
-  * @author trananh, fayimora
   */
-class BinaryReader(val file: File, val gz: Boolean = false) {
+ class BinaryReader(val file: File) {
 
   /** Overloaded constructor */
   def this(filename: String) = this(new File(filename))
