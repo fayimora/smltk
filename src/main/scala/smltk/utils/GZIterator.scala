@@ -1,7 +1,6 @@
 package smltk.utils
 
-
-import java.io.{BufferedReader, InputStreamReader, File, FileInputStream}
+import java.io._
 import java.util.zip.GZIPInputStream
 
 case class BufferedReaderIterator(reader: BufferedReader) extends Iterator[String] {
