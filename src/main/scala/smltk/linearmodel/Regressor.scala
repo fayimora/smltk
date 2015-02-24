@@ -48,8 +48,8 @@ trait Regressor {
    * @return the residual sum of squares \sum_i (y_i - \hat{y_i})^2
    */
   def score(X: DenseMatrix[Double], yTrue: DenseVector[Double]): Double = {
-    import smltk.metrics.regression.rss_score
+    import smltk.metrics.regression.rss
     val yPreds = predict(X)
-    rss_score(yTrue, yPreds)
+    rss(yTrue, yPreds)
   }
 }

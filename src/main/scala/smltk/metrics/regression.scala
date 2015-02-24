@@ -9,17 +9,17 @@ import breeze.numerics._
  */
 
 object regression {
-  def mae_score(yTrue: DenseVector[Double], yPreds: DenseVector[Double]): Double = {
+  def mae(yTrue: DenseVector[Double], yPreds: DenseVector[Double]): Double = {
     var mae = 0.0 + sum(abs(yTrue - yPreds))
     mae/yTrue.size
   }
 
-  def rss_score(yTrue: DenseVector[Double], yPreds: DenseVector[Double]): Double = {
+  def rss(yTrue: DenseVector[Double], yPreds: DenseVector[Double]): Double = {
     var rss = 0.0 + sum((yTrue - yPreds) :^ 2.0)
     rss
   }
 
-  def mse_score(yTrue: DenseVector[Double], yPreds: DenseVector[Double]): Double = {
-    rss_score(yTrue, yPreds)/yTrue.size
+  def mse(yTrue: DenseVector[Double], yPreds: DenseVector[Double]): Double = {
+    rss(yTrue, yPreds)/yTrue.size
   }
 }
