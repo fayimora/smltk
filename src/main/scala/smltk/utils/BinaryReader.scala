@@ -5,10 +5,11 @@ import scala.Array
 import scala.collection.mutable.ArrayBuffer
 
 /** A simple binary file reader.
-  * @param file The binary file to be read.
-  *
-  */
- class BinaryReader(val file: File) {
+ *
+ * @param file The binary file to be read.
+ *
+ */
+class BinaryReader(val file: File) {
 
   /** Overloaded constructor */
   def this(filename: String) = this(new File(filename))
@@ -26,14 +27,16 @@ import scala.collection.mutable.ArrayBuffer
   def close() { dis.close(); bis.close(); fis.close() }
 
   /** Read the next byte.
-    * @return The next byte from the file.
-    */
+   * @return The next byte from the file.
+   */
   def read(): Byte = dis.readByte()
 
   /** Read the next token as a string, using the provided delimiters as breaking points.
-    * @param delimiters ASCII code of delimiter characters (default to SPACE and LINE-FEED).
-    * @return String representation of the next token.
-    */
+   *
+   * @param delimiters ASCII code of delimiter characters (default to SPACE and LINE-FEED).
+   *
+   * @return String representation of the next token.
+   */
   def readToken(delimiters: Set[Int] = Set(SPACE, LF)): String = {
     val bytes = new ArrayBuffer[Byte]()
     val sb = new StringBuilder()
@@ -46,9 +49,10 @@ import scala.collection.mutable.ArrayBuffer
   }
 
   /** Read next 4 bytes as a floating-point number.
-    * @return The floating-point value of the next 4 bytes.
-    */
-   def readDouble(): Double = {
+   *
+   * @return The floating-point value of the next 4 bytes.
+   */
+  def readDouble(): Double = {
     // We need to reverse the byte order here due to endian-compatibility.
     java.lang.Float.intBitsToFloat(java.lang.Integer.reverseBytes(dis.readInt())).toDouble
   }
