@@ -61,20 +61,6 @@ class LogisticRegression extends Classifier {
   // def log_probabilities(x: Transpose[DenseVector[Double]]): Double = ???
   // def log_probabilities(x: DenseVector[Double]): Double = ???
   // def log_probabilities(X: DenseMatrix[Double]): Double = ???
-
-  /** This function computes the accuracy of this classifier
-   *
-   * @param X the test dataset
-   * @param yTrue the true values
-   *
-   * @return the accuracy given test examples
-   */
-  def score(X: DenseMatrix[Double], yTrue: DenseVector[Int]): Double = {
-    import smltk.metrics.classification.accuracy
-    val yPreds = predict(X)
-    accuracy(yTrue, yPreds)
-  }
-
 }
 
 object LogisticRegression {

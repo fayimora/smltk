@@ -26,4 +26,18 @@ trait Classifier {
 
   def predict(X: DenseMatrix[Double]): DenseVector[Int] =
     X(*, ::).map(x => predict(x))
+
+  /** This function computes the accuracy of this classifier
+   *
+   * @param X the test dataset
+   * @param yTrue the true values
+   *
+   * @return the accuracy given test examples
+   */
+  def score(X: DenseMatrix[Double], yTrue: DenseVector[Int]): Double = {
+    import smltk.metrics.classification.accuracy
+    val yPreds = predict(X)
+    accuracy(yTrue, yPreds)
+  }
+
 }
