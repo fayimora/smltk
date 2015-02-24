@@ -8,7 +8,7 @@ import breeze.linalg._
  * @author Fayimora Femi-Balogun
  */
 
-object ClassificationMetrics {
+object classification {
   /** Computes the subset accuracy: the set of label predicted for a sample must exactly match the
    * corresponding set of labels in yTrue
    *

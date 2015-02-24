@@ -70,7 +70,7 @@ class LogisticRegression extends Classifier {
    * @return the accuracy given test examples
    */
   def score(X: DenseMatrix[Double], yTrue: DenseVector[Int]): Double = {
-    import smltk.metrics.ClassificationMetrics.accuracy
+    import smltk.metrics.classification.accuracy
     val yPreds = predict(X)
     accuracy(yTrue, yPreds)
   }

@@ -12,7 +12,7 @@ trait NaiveBayes {
 
   def score(Xtest: DenseMatrix[Double], yTrue: DenseVector[Int]): Double = {
     val yPreds = predict(Xtest)
-    import smltk.metrics.ClassificationMetrics.accuracy
+    import smltk.metrics.classification.accuracy
     accuracy(yTrue, yPreds)
   }
 }

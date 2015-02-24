@@ -2,7 +2,7 @@ import breeze.linalg._
 import smltk.linearmodel._
 import smltk.cluster._
 import smltk.neighbours.KNeighboursClassifier
-import smltk.metrics.ClassificationMetrics._
+import smltk.metrics.classification._
 import smltk.metrics.crossvalidation.KFold
 import smltk.datasets._
 import smltk.extraction.text._

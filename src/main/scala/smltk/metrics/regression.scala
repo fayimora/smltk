@@ -8,7 +8,7 @@ import breeze.numerics._
  * @author Fayimora Femi-Balogun
  */
 
-object RegressionMetrics {
+object regression {
   def mae_score(yTrue: DenseVector[Double], yPreds: DenseVector[Double]): Double = {
     var mae = 0.0 + sum(abs(yTrue - yPreds))
     mae/yTrue.size
