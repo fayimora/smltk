@@ -20,30 +20,25 @@ class Word2Vec {
     val reader = new BinaryReader(file)
 
     // Read header info
-    // numTokens = Integer.parseInt(reader.readToken())
-    // dimension = Integer.parseInt(reader.readToken())
     numTokens = reader.readToken().toInt
     dimension = reader.readToken().toInt
 
-    // Read the vocab words and their associated vector representations
-    var word = ""
+    // Read the vocab tokens and their associated vector representations
+    var token = ""
     val vector = new Array[Double](dimension)
     var normFactor = 1f
     for (_ <- 0 until math.min(numTokens, limit)) {
-      // Read the word
-      word = reader.readToken()
-
-      // Read the vector representation (each vector contains dimension number of floats)
+      // read the token and vector
+      token = reader.readToken()
       for (i <- 0 until vector.length) vector(i) = reader.readDouble()
 
-      // Store the normalized vector representation, keyed by the word
+      // Store the normalized vector representation, keyed by the token
       val normalisedVec = vector.map(_ / normFactor)
-      vocab.put(word, DenseVector(normalisedVec:_*))
+      vocab.put(token, DenseVector(normalisedVec:_*))
 
       // Eat up the next delimiter character
       reader.read()
     }
-    // println("Loaded " + math.min(numTokens, limit) + " words.\n")
     reader.close()
   }
 
