@@ -4,6 +4,7 @@ import breeze.linalg._
 import breeze.optimize._
 import breeze.optimize.FirstOrderMinimizer._
 import breeze.numerics._
+import smltk.base.Classifier
 
 class LogisticRegression extends Classifier {
   var X: DenseMatrix[Double] = _

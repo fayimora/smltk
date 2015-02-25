@@ -2,6 +2,7 @@ package smltk.linearmodel
 
 import breeze.linalg._
 import breeze.numerics._
+import smltk.base.Regressor
 
 class LinearRegression(lambda: Double = 0.0) extends Regressor {
 

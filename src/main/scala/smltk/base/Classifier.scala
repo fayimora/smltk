@@ -1,4 +1,4 @@
-package smltk.linearmodel
+package smltk.base
 
 import breeze.linalg._
 
