@@ -9,17 +9,17 @@ trait NaiveBayes extends Classifier {
 }
 
 class MultinomialNB extends NaiveBayes {
-  def fit(X: breeze.linalg.DenseMatrix[Double],y: breeze.linalg.DenseVector[Int]) = ???
-  def predict(x: breeze.linalg.Transpose[breeze.linalg.DenseVector[Double]]): Int = ???
+  def fit(X: DenseMatrix[Double],y: DenseVector[Int]) = ???
+  def predict(x: Transpose[DenseVector[Double]]): Int = ???
 }
 
 class GaussianNB extends NaiveBayes {
-  def fit(X: breeze.linalg.DenseMatrix[Double],y: breeze.linalg.DenseVector[Int]) = ???
-  def predict(x: breeze.linalg.Transpose[breeze.linalg.DenseVector[Double]]): Int = ???
+  def fit(X: DenseMatrix[Double],y: DenseVector[Int]) = ???
+  def predict(x: Transpose[DenseVector[Double]]): Int = ???
 }
 
 class BernoulliNB extends NaiveBayes {
-  def fit(X: breeze.linalg.DenseMatrix[Double],y: breeze.linalg.DenseVector[Int]) = ???
-  def predict(x: breeze.linalg.Transpose[breeze.linalg.DenseVector[Double]]): Int = ???
+  def fit(X: DenseMatrix[Double],y: DenseVector[Int]) = ???
+  def predict(x: Transpose[DenseVector[Double]]): Int = ???
 }
 
