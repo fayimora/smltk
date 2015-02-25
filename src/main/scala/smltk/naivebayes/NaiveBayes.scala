@@ -1,18 +1,25 @@
 package smltk.naivebayes
 
 import breeze.linalg._
+import smltk.base.Classifier
 
-trait NaiveBayes {
+trait NaiveBayes extends Classifier {
   private val ZERO_PROBABILITY = 1e-12
   var probabilities = None
-
-  def fit(X: DenseMatrix[Double], y: DenseVector[Int]): Unit
-
-  def predict(X: DenseMatrix[Double]): DenseVector[Int]
-
-  def score(Xtest: DenseMatrix[Double], yTrue: DenseVector[Int]): Double = {
-    val yPreds = predict(Xtest)
-    import smltk.metrics.classification.accuracy
-    accuracy(yTrue, yPreds)
-  }
 }
+
+class MultinomialNB extends NaiveBayes {
+  def fit(X: breeze.linalg.DenseMatrix[Double],y: breeze.linalg.DenseVector[Int]): Unit = ???
+  def predict(x: breeze.linalg.Transpose[breeze.linalg.DenseVector[Double]]): Int = ???
+}
+
+class GaussianNB extends NaiveBayes {
+  def fit(X: breeze.linalg.DenseMatrix[Double],y: breeze.linalg.DenseVector[Int]): Unit = ???
+  def predict(x: breeze.linalg.Transpose[breeze.linalg.DenseVector[Double]]): Int = ???
+}
+
+class BernoulliNB extends NaiveBayes {
+  def fit(X: breeze.linalg.DenseMatrix[Double],y: breeze.linalg.DenseVector[Int]): Unit = ???
+  def predict(x: breeze.linalg.Transpose[breeze.linalg.DenseVector[Double]]): Int = ???
+}
+
