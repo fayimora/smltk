@@ -10,7 +10,7 @@ import smltk.extraction.text._
 object Playground {
 
   def main(args: Array[String]) = {
-    word2vec()
+    // word2vec()
     // tfIdfVectorizer()
     // countVectorizer()
     // logistic()
@@ -18,7 +18,7 @@ object Playground {
     // crossvalidation()
     // knn()
     // metrics()
-    // clustering()
+    clustering()
   }
 
   def word2vec() {
@@ -103,18 +103,15 @@ object Playground {
   }
 
   def clustering() {
-    println("==================== CLustering ====================")
-    // X = DenseMatrix.rand[Double](200, 10)
+    println("==================== Clustering ====================")
     val data = iris()
     val X = data._1
     val y = data._2
-    val pca = princomp(X)
-    // val model = pca.loadings(0 until 2, ::)
-    // val XNew = (model.t * model) * pca.center
+    val components = princomp(X).scores
+    val XNew = components(::, (0 until 3))
 
-    val cl = Kmeans(3, maxIterations=1000, nRuns=5)
-    cl.fit(pca.scores)
-    println(cl.centroids)
+    val cl = Kmeans(3, maxIterations=100, nRuns=10)
+    cl.fit(XNew)
     println(s"Objective: ${cl.objective}")
     println(cl.labels)
   }
