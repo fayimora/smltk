@@ -10,9 +10,13 @@ class Word2Vec {
   private var numTokens = 0
   private var dimension = 0
 
-
-  def load(filename: String, limit: Integer = Int.MaxValue) {
-    val file = new File(filename)
+  /** This function loads a trained model(binary format)
+   *
+   *  @param filePath the full path to the binary file
+   *  @param limit maximum number of tokens to load
+   */
+  def load(filePath: String, limit: Integer = Int.MaxValue) {
+    val file = new File(filePath)
     if (!file.exists())
       throw new FileNotFoundException("Binary vector file not found <" + file.toString + ">")
 
