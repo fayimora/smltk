@@ -46,9 +46,9 @@ class Word2Vec {
     reader.close()
   }
 
-  /** function used to access the vector of a token.
-   *  val model = Word2Vec()
-   *  model.load("/path/to/bin/file")
+  /** Used to access the vector of a token.<br>
+   *  val model = Word2Vec() <br>
+   *  model.load("/path/to/bin/file")<br>
    *  model("people") // returns vector of the argument token
    *
    *  @param token the token for which we want a vector representation
