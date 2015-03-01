@@ -2,7 +2,7 @@ package smltk.extraction.text
 
 import java.io._
 import collection.mutable.HashMap
-import breeze.linalg.DenseVector
+import breeze.linalg.{norm, DenseVector}
 import smltk.utils.BinaryReader
 
 class Word2Vec {
@@ -44,6 +44,19 @@ class Word2Vec {
       reader.read()
     }
     reader.close()
+  }
+
+  def apply(token: String) = {
+    require(vocab.contains(token), s"Out of vocabulary word: $token")
+    vocab(token)
+  }
+
+  def cosine(w1: String, w2: String): Double = {
+    cosine(apply(w1), apply(w2))
+  }
+
+  def cosine(v1: DenseVector[Double], v2: DenseVector[Double]): Double = {
+    (v1 dot v2) / (norm(v1) * norm(v2))
   }
 
 }
