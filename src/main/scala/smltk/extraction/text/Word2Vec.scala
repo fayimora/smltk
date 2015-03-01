@@ -46,15 +46,37 @@ class Word2Vec {
     reader.close()
   }
 
+  /** function used to access the vector of a token.
+   *  val model = Word2Vec()
+   *  model.load("/path/to/bin/file")
+   *  model("people") // returns vector of the argument token
+   *
+   *  @param token the token for which we want a vector representation
+   *
+   *  @return the vector representation of the token
+   */
   def apply(token: String) = {
     require(vocab.contains(token), s"Out of vocabulary word: $token")
     vocab(token)
   }
 
-  def cosine(w1: String, w2: String): Double = {
-    cosine(apply(w1), apply(w2))
+  /** Returns the cosine similarity between two strings. This operation is commutative. It is
+   *  expected that the argument tokens are in the vocabulary of the trained model.
+   *  @param token1 the first token
+   *  @param token2 the second token
+   *
+   *  @return the cosine similarity
+   */
+  def cosine(token1: String, token2: String): Double = {
+    cosine(apply(token1), apply(token2))
   }
 
+  /** Returns the cosine similarity between two vectors. This operation is commutative
+   *  @param v1 the first vector
+   *  @param v2 the second vector
+   *
+   *  @return the cosine similarity
+   */
   def cosine(v1: DenseVector[Double], v2: DenseVector[Double]): Double = {
     (v1 dot v2) / (norm(v1) * norm(v2))
   }
