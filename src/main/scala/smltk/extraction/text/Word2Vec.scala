@@ -56,8 +56,18 @@ class Word2Vec {
    *  @return the vector representation of the token
    */
   def apply(token: String) = {
-    require(vocab.contains(token), s"Out of vocabulary word: $token")
+    require(contains(token), s"Out of vocabulary word: $token")
     vocab(token)
+  }
+
+  /** Checks if the token is present in the vocabulary.
+   *
+   * @param word Token to be checked.
+   *
+   * @return True if the word is in the vocab map.
+   */
+  def contains(word: String): Boolean = {
+    vocab.get(word).isDefined
   }
 
   /** Returns the cosine similarity between two strings. This operation is commutative. It is
