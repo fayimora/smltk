@@ -11,7 +11,6 @@ Contributions are certainly welcome! Just send a pull request.
 Generally speaking, I'm doing this to better understand the algorithms. Maybe at some point other
 researchers will use this library :smile:
 
-
 ## Documentation
 I will do my best to write very detailed documentation as I implement this toolkit and also create a
 repository for examples. However, as this library is very much alpha, these examples will come a bit
