@@ -30,14 +30,18 @@ class LogisticRegression extends Classifier {
         var cost = 0.0
         var grad = DenseVector.rand(k*nFeats)
         for(i <- 0 until nSamples) {
-          var lhs = 0.0
-          var rhs = 0.0
+          // var lhs = 0.0
+          // var rhs = 0.0
           for(c <- 0 until k) {
-            val phi = w(c, ::).t dot X(i, ::).t
-            lhs += I(y(i) == c) * phi
-            rhs += math.exp(phi)
+            val a = I(y(i) == c)
+            // TODO: this softmax isn't complete! finish up the denominator
+            val b = log(math.exp(w(c,::).t dot X(i, ::)) / math.exp(w(c,::).t dot X(i, ::)))
+            cost += a * b
+            // val phi = w(c, ::).t dot X(i, ::).t
+            // lhs += I(y(i) == c) * phi
+            // rhs += math.exp(phi)
           }
-          cost += lhs - log(rhs)
+          // cost += lhs - log(rhs)
         }
         println(cost)
 
