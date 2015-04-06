@@ -28,21 +28,30 @@ class LogisticRegression extends Classifier {
       def calculate(thetas: DenseVector[Double]) = {
         val w = thetas.toDenseMatrix.reshape(k, nFeats)
         var cost = 0.0
-        var grad = DenseVector.rand(k*nFeats)
         for(i <- 0 until nSamples) {
-          // var lhs = 0.0
-          // var rhs = 0.0
           for(c <- 0 until k) {
             val a = I(y(i) == c)
-            // TODO: this softmax isn't complete! finish up the denominator
-            val b = log(math.exp(w(c,::).t dot X(i, ::)) / math.exp(w(c,::).t dot X(i, ::)))
-            cost += a * b
-            // val phi = w(c, ::).t dot X(i, ::).t
-            // lhs += I(y(i) == c) * phi
-            // rhs += math.exp(phi)
+            val numer = exp(w(c,::).t dot X(i, ::).t)
+            val denom = (for(l <- 0 until k) yield exp(w(c,::).t dot X(i, ::).t)).sum
+            cost += a * log(numer/denom)
           }
-          // cost += lhs - log(rhs)
         }
+
+        // compute gradient
+        var grad = DenseVector.rand(k*nFeats)
+        // var grad = DenseVector.zeros(k*nFeats)
+        // for(j <- 0 until k) {
+        //   var sum = DenseVector.zeros[Double](nFeats)
+        //   for (i <- 0 to nSamples) {
+        //     val numer = exp(w(j,::).t dot X(i, ::).t)
+        //     val denom = (for(l <- 0 until k) yield exp(w(j,::).t dot X(i, ::).t)).sum
+        //     val p = numer/denom
+        //     val diff = I(y(i)==j) - p
+        //     sum += X(i, ::).t * diff
+        //   }
+        //   grad(j, ::) := (-1/m) * sum
+        // }
+
         println(cost)
 
         // no way this is efficient!
