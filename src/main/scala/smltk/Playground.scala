@@ -10,10 +10,10 @@ import smltk.extraction.text._
 object Playground {
 
   def main(args: Array[String]) = {
-    word2vec()
+    // word2vec()
     // tfIdfVectorizer()
     // countVectorizer()
-    // logistic()
+    logistic()
     // linearmodels()
     // crossvalidation()
     // knn()

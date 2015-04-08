@@ -8,64 +8,56 @@ import smltk.base.Classifier
 
 class LogisticRegression extends Classifier {
   var X: DenseMatrix[Double] = _
+  var y: DenseVector[Int] = _
   var weights: DenseMatrix[Double] = _
   var log_probabilities: DenseVector[Double] = _
+  var nClasses = 0
 
-  /** The number of samples in the dataset */
-  // var nSamples = 0
 
-  /** The number of features in the dataset */
-  // var nFeats = 0
-
+  private def getGroundTruth(): DenseMatrix[Double] = {
+    // do one-hot encoding here
+    val groundTruth = DenseMatrix.zeros[Double](nClasses, nSamples)
+    for(k <- 0 until nClasses) {
+      val idxs = y.findAll(_ == k)
+      val gt = DenseVector.zeros[Double](nSamples)
+      idxs.foreach{ i => gt(i) = 1}
+      groundTruth(k, ::) := gt.t
+    }
+    groundTruth
+  }
 
   def fit(X: DenseMatrix[Double], y: DenseVector[Int]) = {
+    // setup instance variables
     this.X = X
-    nSamples = X.rows
-    nFeats = X.cols
-    k = y.toArray.distinct.size
+    this.y = y
+    this.nSamples = X.rows
+    this.nFeats = X.cols
+    this.nClasses = y.toArray.distinct.size
 
     val objective = new DiffFunction[DenseVector[Double]] {
       def calculate(thetas: DenseVector[Double]) = {
-        val w = thetas.toDenseMatrix.reshape(k, nFeats)
-        var cost = 0.0
-        for(i <- 0 until nSamples) {
-          for(c <- 0 until k) {
-            val a = I(y(i) == c)
-            val numer = exp(w(c,::).t dot X(i, ::).t)
-            val denom = (for(l <- 0 until k) yield exp(w(c,::).t dot X(i, ::).t)).sum
-            cost += a * log(numer/denom)
-          }
-        }
+        val w = thetas.toDenseMatrix.reshape(nClasses, nFeats)
+        val groundTruth = getGroundTruth()
+        val hypothesis = w * X.t
+        val probs = exp(hypothesis) / sum(exp(hypothesis))
+        val costExamples = groundTruth * log(probs.t)
+
+        // compute cost
+        val cost = -(sum(costExamples) / nSamples)
+        // cost += (sum(w*w.t)*0.8) # regularisation
 
         // compute gradient
-        var grad = DenseVector.rand(k*nFeats)
-        // var grad = DenseVector.zeros(k*nFeats)
-        // for(j <- 0 until k) {
-        //   var sum = DenseVector.zeros[Double](nFeats)
-        //   for (i <- 0 to nSamples) {
-        //     val numer = exp(w(j,::).t dot X(i, ::).t)
-        //     val denom = (for(l <- 0 until k) yield exp(w(j,::).t dot X(i, ::).t)).sum
-        //     val p = numer/denom
-        //     val diff = I(y(i)==j) - p
-        //     sum += X(i, ::).t * diff
-        //   }
-        //   grad(j, ::) := (-1/m) * sum
-        // }
+        val grad: DenseMatrix[Double] = - ((groundTruth - probs) * X) :/ nSamples.toDouble
 
-        println(cost)
+        println(s"Cost is: $cost")
 
-        // no way this is efficient!
-        // this.X.t.toArray.sliding(r, r).zipWithIndex.filter(t => ids.contains(t._2)).toArray
-        // mat.t.toArray.sliding(3,3).map(_.mkString("::")).toArray
-
-        (-cost, grad)
+        (cost, grad.t.toDenseVector)
       }
     }
 
-    // val initWeights = DenseVector.zeros[Double](k * nFeats)
-    val initWeights = DenseVector.rand(k * nFeats)
-    val params = OptParams(tolerance = 1E-6)
-    weights = minimize(objective, initWeights, params).toDenseMatrix.reshape(k, nFeats)
+    val initWeights = DenseVector.rand(nClasses * nFeats) :* 0.005
+    val params = OptParams(tolerance = 1E-6, maxIterations = 1000, useStochastic = true)
+    weights = minimize(objective, initWeights, params).toDenseMatrix.reshape(nClasses, nFeats)
     println("returned result")
     println(weights)
   }
