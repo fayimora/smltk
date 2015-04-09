@@ -13,7 +13,6 @@ class LogisticRegression extends Classifier {
   var log_probabilities: DenseVector[Double] = _
   var nClasses = 0
 
-
   private def getGroundTruth(): DenseMatrix[Double] = {
     // do one-hot encoding here
     val groundTruth = DenseMatrix.zeros[Double](nClasses, nSamples)
@@ -56,13 +55,23 @@ class LogisticRegression extends Classifier {
     }
 
     val initWeights = DenseVector.rand(nClasses * nFeats) :* 0.005
-    val params = OptParams(tolerance = 1E-6, maxIterations = 1000, useStochastic = true)
+    val params = OptParams(tolerance = 1E-6, maxIterations = 1000, useStochastic = false)
     weights = minimize(objective, initWeights, params).toDenseMatrix.reshape(nClasses, nFeats)
     println("returned result")
     println(weights)
   }
 
-  override def predict(x: Transpose[DenseVector[Double]]): Int = ???
+  override def predict(x: Transpose[DenseVector[Double]]): Int = {
+    val hypothesis = weights * x.t
+    // println(s"weights is ${weights.rows} by ${weights.cols}")
+    // println(s"x is ${x.t.size}")
+    val probs = exp(hypothesis) / sum(exp(hypothesis))
+    // println(s"probs is ${probs.size}")
+    // println(probs)
+    // println(s"probs is ${probs.rows} by ${probs.cols}")
+    val prediction = argmax(probs)
+    prediction
+  }
 
   // def log_probabilities(x: Transpose[DenseVector[Double]]): Double = ???
   // def log_probabilities(x: DenseVector[Double]): Double = ???

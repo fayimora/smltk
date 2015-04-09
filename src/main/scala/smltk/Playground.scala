@@ -49,6 +49,12 @@ object Playground {
     val y = data._2
     val clf = LogisticRegression()
     clf.fit(X, y)
+    println(s"Acc is: ${clf.score(X, y)}")
+    val predictions = clf.predict(X(0 to 20,::))
+    println("====== actuals ======")
+    println(y(0 to 20))
+    println("====== predictions ======")
+    println(predictions)
   }
 
   def crossvalidation(){
